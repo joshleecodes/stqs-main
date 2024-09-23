@@ -1,15 +1,16 @@
-import { useState } from "react"
-import { Link } from "react-router-dom";
 import * as APIWrapper from "../../api/spaceTradersAPI"
-
 
 
 interface HubProps {
   token: string;
+  headquarters: string;
+  accountID: string;
 }
 
 const Hub = ({
   token,
+  headquarters,
+  accountID,
 }: HubProps) => {
 
   const handleViewAgentDetails = async () => {
@@ -38,14 +39,9 @@ const Hub = ({
     <div>
       
       <h1>Hub</h1>
-      <nav>
-        <ul>
-          <li><Link to="/contracts">Contracts</Link></li>
-          <li><Link to="/market">Market</Link></li>
-          <li><Link to="/shipyard">Shipyard</Link></li>
-          <li><Link to="/mining">Mining</Link></li>
-        </ul>
-      </nav>
+      <p>{headquarters}</p>
+      <p>{accountID}</p>
+      
       <input type="submit" value="show agent" onClick={handleViewAgentDetails} />
       <input type="submit" value="show starting location" onClick={handleViewStartingLocation} />
     </div>

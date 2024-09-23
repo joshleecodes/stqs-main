@@ -12,9 +12,10 @@ import Mining from "./pages/mining/Mining";
 function App() {
   const [token, setToken] = useState<string>('');
   const [symbol, setSymbol] = useState<string>("");
-  const [headquarters, setHeadquarters] = useState<string>("") //Maybe move to Hub page
   const [credits, setCredits] = useState<number>(0);
   const [shipCount, setShipCount] = useState<number>(0);
+  const [headquarters, setHeadquarters] = useState<string>(""); //Maybe move to Hub page
+  const [accountID, setAccountID] = useState<string>("");
 
   return (
     <Router>
@@ -27,6 +28,8 @@ function App() {
                 setSymbol={setSymbol}
                 setCredits={setCredits}
                 setShipCount={setShipCount}
+                setHeadquarters={setHeadquarters}
+                setAccountID={setAccountID}
               />
           }
         />
@@ -40,7 +43,11 @@ function App() {
                 credits={credits}
                 shipCount={shipCount}
               />
-              <Hub token={token} />
+              <Hub 
+                token={token}
+                headquarters={headquarters}
+                accountID={accountID}
+              />
           </> 
           : <Navigate to="/login" />} 
         />
@@ -54,7 +61,9 @@ function App() {
                 credits={credits}
                 shipCount={shipCount}
               />
-              <Contracts />
+              <Contracts 
+                token={token}
+              />
             </>
             : <Navigate to="/login" />} 
         />
