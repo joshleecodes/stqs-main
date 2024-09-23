@@ -17,6 +17,7 @@ const LogIn = ({
   const [signInForm, setSignInForm] = useState({ token: ""});
   const navigate = useNavigate();
 
+
   const handleSignUp = async () => {
     try {
       const result = await APIWrapper.signUp(signUpForm.symbol, signUpForm.faction);
@@ -29,9 +30,17 @@ const LogIn = ({
     }
   };
 
-  const handleSignIn = () => {
-    setToken(signInForm.token);
-    navigate("/hub");
+  const handleSignIn = async () => {
+    try {
+      const result = await APIWrapper.viewAgentDetails(signInForm.token);
+      if(result){
+        setToken(signInForm.token);
+        navigate("/hub");
+      }
+    } catch (error) {
+      console.error('API TOKEN NOT FOUND', error);
+      setResp('API TOKEN NOT FOUND');
+    }
   };
 
 

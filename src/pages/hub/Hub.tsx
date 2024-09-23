@@ -49,7 +49,7 @@ const Hub = ({
       <input type="submit" value="show agent" onClick={handleViewAgentDetails} />
       <input type="submit" value="show starting location" onClick={handleViewStartingLocation} />
       <pre>Response: {resp}</pre>
-      <pre>Response: {token}</pre>
+      <pre>token: {token}</pre>
     </div>
   );
 }

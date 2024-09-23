@@ -27,12 +27,12 @@ export const signUp = async (symbol: string, faction: string) => {
   return await checkAPIResponse(resp, "signUp Error");
 };
 
+
 export const viewAgentDetails = async (token: string) => {
   const resp = await fetch(API_URL_BASE + "/my/agent", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token, 
     },
   });
   
@@ -44,7 +44,6 @@ export const viewStartingLocation = async (token: string) => {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
     },
   });
 
@@ -56,7 +55,6 @@ export const viewContracts = async (token: string) => {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
     },
   });
   
