@@ -4,7 +4,7 @@ const API_URL_BASE = 'https://api.spacetraders.io/v2';
 const checkAPIResponse = async (response: Response, errorMessage: string) => {
   if (response.ok) {
     const json = await response.json();
-    return JSON.stringify(json, null, 2);
+    return json;
   } else {
     console.log(response);
     console.log(errorMessage);

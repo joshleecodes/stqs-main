@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as APIWrapper from "../../api/spaceTradersAPI"
 
 
+
 interface HubProps {
   token: string;
 }
@@ -10,14 +11,12 @@ interface HubProps {
 const Hub = ({
   token,
 }: HubProps) => {
-  const [resp, setResp] = useState<string>("");
-  
 
   const handleViewAgentDetails = async () => {
     try {
       const result = await APIWrapper.viewAgentDetails(token);
       if (result) {
-        setResp(result);
+        console.log(result);
       }
     } catch (error) {
       console.error('Error fetching agent data:', error);
@@ -28,7 +27,7 @@ const Hub = ({
     try {
       const result = await APIWrapper.viewStartingLocation(token);
       if (result) {
-        setResp(result);
+        console.log(result);
       }
     } catch (error) {
       console.error('Error fetching location data:', error);
@@ -37,6 +36,7 @@ const Hub = ({
 
   return (
     <div>
+      
       <h1>Hub</h1>
       <nav>
         <ul>
@@ -48,8 +48,6 @@ const Hub = ({
       </nav>
       <input type="submit" value="show agent" onClick={handleViewAgentDetails} />
       <input type="submit" value="show starting location" onClick={handleViewStartingLocation} />
-      <pre>Response: {resp}</pre>
-      <pre>token: {token}</pre>
     </div>
   );
 }
