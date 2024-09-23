@@ -6,24 +6,25 @@ const checkAPIResponse = async (response: Response, errorMessage: string) => {
     const json = await response.json();
     return JSON.stringify(json, null, 2);
   } else {
+    console.log(response);
     console.log(errorMessage);
     throw new Error(errorMessage);
   }
 };
 
-export const startNewGame = async (symbol: string, faction: string) => {
+export const signUp = async (symbol: string, faction: string) => {
   const resp = await fetch(API_URL_BASE + "/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      symbol,
-      faction,
+      symbol: symbol,
+      faction: faction
     }),
   });
 
-  return await checkAPIResponse(resp, "startNewGame Error");
+  return await checkAPIResponse(resp, "signUp Error");
 };
 
 export const viewAgentDetails = async (token: string) => {
