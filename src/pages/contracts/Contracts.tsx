@@ -62,40 +62,46 @@ token,
 
   
 
-  return(<>
-      <h1>Contracts</h1>
-      <input type="submit" value="Refresh Contracts" onClick={handleViewContracts} />
-
+  return(
+    <div className="contract-container">
+      <div className="contract-header-wrapper">
+        <h2>Contracts</h2>
+        <button onClick={handleViewContracts}>Refresh Contracts</button>
+      </div>
       {contracts.length > 0 ? (
       <div className="contract-list-wrapper">
         {contracts.map((contract) => (
           <div key={contract.id} className="contract-wrapper">
-            <p>Contract Type: {contract.type}</p>
-            <p>Accepted: {contract.accepted? 'Yes' : 'No'}</p>
-            <p>Deadline to Accept: {new Date(contract.deadlineToAccept).toLocaleString()}</p>
-            <p>Completed: {contract.fulfilled? 'Yes' : 'No'}</p>
-            <h3>Terms:</h3>
-            <p>Deadline: {new Date(contract.terms.deadline).toLocaleString()}</p>
-            <p>Payment on Accept: {contract.terms.payment.onAccepted}</p>
-            <p>Payment on Fulfill: {contract.terms.payment.onFulfilled}</p>
-            <h3>Delivery Terms: </h3>
-            <ul>
-              {contract.terms.deliver.map((item, index) => (
-                <li key={index}>
-                  {item.unitsRequired} {item.tradeSymbol} to {item.destinationSymbol}
-                </li>
-              ))}
-            </ul>
+            <div>
+              <p>Contract Type: {contract.type}</p>
+              <p>Accepted: {contract.accepted? 'Yes' : 'No'}</p>
+              <p>Deadline to Accept: {new Date(contract.deadlineToAccept).toLocaleString()}</p>
+              <p>Completed: {contract.fulfilled? 'Yes' : 'No'}</p>
+              <h3>Terms:</h3>
+              <p>Deadline: {new Date(contract.terms.deadline).toLocaleString()}</p>
+              <p>Payment on Accept: {contract.terms.payment.onAccepted}</p>
+              <p>Payment on Fulfill: {contract.terms.payment.onFulfilled}</p>
+              <h3>Delivery Terms: </h3>
+              <ul>
+                {contract.terms.deliver.map((item, index) => (
+                  <li key={index}>
+                    {item.unitsRequired} {item.tradeSymbol} to {item.destinationSymbol}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
             {!contract.accepted && (
-              <input type="submit" value="Accept Contract" onClick={() => acceptContract(contract.id)} />
+              <button onClick={() => acceptContract(contract.id)}>Accept Contract</button>
             )}
           </div>
         ))}
       </div>
-    ) : (
-      <p>No contracts available.</p>
-    )}
-  </>)
+      ) : (
+        <p>No contracts available.</p>
+        )}
+    </div>
+  )
 
 }
 

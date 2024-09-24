@@ -70,8 +70,8 @@ const Hub = ({
 
   return (
     <div className="hub-container">
-      <h1>Hub</h1>
-      <div className="agent-details-wrapper">
+      
+      <div className="agent-details-wrapper hub-details">
         <h2>Agent Details:</h2>
         <p>Account ID: {accountID}</p>
         <p>Headquarters: {headquarters}</p>
@@ -79,7 +79,7 @@ const Hub = ({
         <button onClick={handleViewAgentDetails}>Refresh</button>
       </div>
       
-      <div className="location-details-wrapper">
+      <div className="location-details-wrapper hub-details">
         <h2>Location Details:</h2>
         {startingLocation ? (
           <div>

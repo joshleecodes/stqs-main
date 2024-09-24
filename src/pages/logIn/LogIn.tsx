@@ -44,7 +44,7 @@ const LogIn = ({
     try {
       const result = await APIWrapper.signUp(signUpForm.symbol, signUpForm.faction);
         console.log(result);
-        updateAgent(result.data.token, result.data.agent.symbol, result.data.agent.symbol, result.data.agent.shipCount, result.data.agent.headquarters, result.data.agent.accountId);
+        updateAgent(result.data.token, result.data.agent.symbol, result.data.agent.credits, result.data.agent.shipCount, result.data.agent.headquarters, result.data.agent.accountId);
         navigate("/hub");
 
     } catch (error) {
