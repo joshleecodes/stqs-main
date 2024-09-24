@@ -5,13 +5,15 @@ interface HeaderProps {
     symbol: string,
     credits: number,
     shipCount: number,
+    handleLogOut: () => void
 }
 
 const Header = ({
     token,
     symbol,
     credits,
-    shipCount
+    shipCount,
+    handleLogOut
 }: HeaderProps) => {
 
     return (
@@ -28,6 +30,7 @@ const Header = ({
                 <Link to="/mining">Mining</Link>
                 <Link to="/market">Market</Link>
             </div>
+            <input type="submit" value="Log Out" onClick={handleLogOut} />
         </div>
     )
 }

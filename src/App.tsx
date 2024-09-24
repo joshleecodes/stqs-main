@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 import LogIn from "./pages/logIn/LogIn";
 import Header from "./components/header/Header";
@@ -10,12 +10,21 @@ import Shipyard from "./pages/shipyard/Shipyard";
 import Mining from "./pages/mining/Mining";
 
 function App() {
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<string>( localStorage.getItem("API Token") || '');
   const [symbol, setSymbol] = useState<string>("");
   const [credits, setCredits] = useState<number>(0);
   const [shipCount, setShipCount] = useState<number>(0);
   const [headquarters, setHeadquarters] = useState<string>(""); //Maybe move to Hub page
   const [accountID, setAccountID] = useState<string>("");
+
+  //Save IDs of tracked and collected items
+  useEffect(() => {
+    localStorage.setItem("API Token", token);
+  }, [token]);
+
+  const handleLogOut = () => {
+    setToken('');
+  }
 
   return (
     <Router>
@@ -23,7 +32,8 @@ function App() {
         <Route 
           path="/login" 
           element={
-              <LogIn 
+              <LogIn
+                tokenExists={token !== ''}
                 setToken={setToken} 
                 setSymbol={setSymbol}
                 setCredits={setCredits}
@@ -42,6 +52,7 @@ function App() {
                 symbol={symbol}
                 credits={credits}
                 shipCount={shipCount}
+                handleLogOut={handleLogOut}
               />
               <Hub 
                 token={token}
@@ -60,6 +71,7 @@ function App() {
                 symbol={symbol}
                 credits={credits}
                 shipCount={shipCount}
+                handleLogOut={handleLogOut}
               />
               <Contracts 
                 token={token}
@@ -76,6 +88,7 @@ function App() {
                 symbol={symbol}
                 credits={credits}
                 shipCount={shipCount}
+                handleLogOut={handleLogOut}
               />
               <Market />
             </> 
@@ -90,6 +103,7 @@ function App() {
                   symbol={symbol}
                   credits={credits}
                   shipCount={shipCount}
+                  handleLogOut={handleLogOut}
                 />
                 <Shipyard />
             </>
@@ -104,6 +118,7 @@ function App() {
                 symbol={symbol}
                 credits={credits}
                 shipCount={shipCount}
+                handleLogOut={handleLogOut}
               />
               <Mining />
             </>

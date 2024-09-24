@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import * as APIWrapper from "../../api/spaceTradersAPI"
 
-
 interface LogInProps {
+  tokenExists: boolean;
   setToken: (token: string) => void;
   setSymbol: (symbol: string) => void;
   setCredits: (credits: number) => void;
@@ -13,6 +13,7 @@ interface LogInProps {
 }
 
 const LogIn = ({
+  tokenExists,
   setToken,
   setSymbol,
   setCredits,
@@ -32,6 +33,12 @@ const LogIn = ({
     setHeadquarters(headquarters);
     setAccountID(accountID);
   }
+  
+  useEffect(() => {
+    if (tokenExists) {
+      handleSignInLocal();
+    }
+  }, [tokenExists]);
 
   const handleSignUp = async () => {
     try {
@@ -48,6 +55,7 @@ const LogIn = ({
   const handleSignIn = async () => {
     try {
       const result = await APIWrapper.viewAgentDetails(signInForm.token);
+
       if(result){
         console.log(result);
         updateAgent(signInForm.token, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
@@ -55,6 +63,24 @@ const LogIn = ({
       }
     } catch (error) {
       console.error('API TOKEN NOT FOUND', error);
+    }
+  };
+
+  const handleSignInLocal = async () => {
+    const localToken = localStorage.getItem('API Token'); // Get token from local storage
+    if (localToken) {
+      try {
+        const result = await APIWrapper.viewAgentDetails(localToken);
+        if (result) {
+          console.log(result);
+          updateAgent(localToken, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
+          navigate("/hub");
+        }
+      } catch (error) {
+        console.error('Stored API TOKEN NOT FOUND', error);
+      }
+    } else {
+      console.error('No token found in local storage.');
     }
   };
 
