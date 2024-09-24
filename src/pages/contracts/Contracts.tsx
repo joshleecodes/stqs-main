@@ -60,8 +60,6 @@ token,
     }
   }
 
-  
-
   return(
     <div className="contract-container">
       <div className="contract-header-wrapper">
@@ -102,7 +100,6 @@ token,
         )}
     </div>
   )
-
 }
 
 export default Contracts;

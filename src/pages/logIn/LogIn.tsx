@@ -67,7 +67,7 @@ const LogIn = ({
   };
 
   const handleSignInLocal = async () => {
-    const localToken = localStorage.getItem('API Token'); // Get token from local storage
+    const localToken = localStorage.getItem('API Token');
     if (localToken) {
       try {
         const result = await APIWrapper.viewAgentDetails(localToken);
@@ -83,7 +83,6 @@ const LogIn = ({
       console.error('No token found in local storage.');
     }
   };
-
 
   return (
     <div className="login-container">

@@ -13,10 +13,9 @@ function App() {
   const [symbol, setSymbol] = useState<string>("");
   const [credits, setCredits] = useState<number>(0);
   const [shipCount, setShipCount] = useState<number>(0);
-  const [headquarters, setHeadquarters] = useState<string>(""); //Maybe move to Hub page
+  const [headquarters, setHeadquarters] = useState<string>("");
   const [accountID, setAccountID] = useState<string>("");
 
-  //Save IDs of tracked and collected items
   useEffect(() => {
     localStorage.setItem("API Token", token);
   }, [token]);
