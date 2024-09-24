@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 import LogIn from "./pages/logIn/LogIn";
@@ -58,6 +58,8 @@ function App() {
                 token={token}
                 headquarters={headquarters}
                 accountID={accountID}
+                setCredits={setCredits}
+                setShipCount={setShipCount}
               />
           </> 
           : <Navigate to="/login" />} 
