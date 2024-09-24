@@ -1,0 +1,38 @@
+.header-container{
+    width: 96vw;
+    padding: 0 2vw;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $zomp;
+    border-bottom: 1px solid $bittersweet;
+}
+
+.header-details-wrapper, .header-nav-wrapper{
+    display: flex;
+    justify-content: space-around;
+    width: 30vw;
+}
+
+.header-details-wrapper{
+    max-width: 25vw;
+    color: $slate;
+}
+
+.details-info, .nav-item {
+    display: flex;
+    align-items: center;
+
+}
+
+.header-button{
+    height: 3vh;
+    background-color: $slate;
+    color: $bittersweet;
+}
+
+.header-button:hover{
+    border-color: $bittersweet;
+}

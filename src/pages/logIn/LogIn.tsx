@@ -89,17 +89,21 @@ const LogIn = ({
     <div className="login-container">
 
       <div className="signup-wrapper">
-        <h1>Sign Up</h1>
-        <input name="symbol" value={signUpForm.symbol} onChange={(e) => setSignUpForm({ ...signUpForm, symbol: e.currentTarget.value })} />
-        <input name="faction" value={signUpForm.faction} onChange={(e) => setSignUpForm({ ...signUpForm, faction: e.currentTarget.value })} />
-        <input type="submit" onClick={handleSignUp} />
+        <h1>REGISTER</h1>
+        <div className="input-wrapper">
+          <input name="symbol" placeholder={"Enter Symbol"} value={signUpForm.symbol} onChange={(e) => setSignUpForm({ ...signUpForm, symbol: e.currentTarget.value })} />
+          <input name="faction" placeholder={"Enter Faction"} value={signUpForm.faction} onChange={(e) => setSignUpForm({ ...signUpForm, faction: e.currentTarget.value })} />
+        </div>
+        
+        <button className="login-button" onClick={handleSignUp}>Sign Up</button>
       </div>
 
       <div className="signin-wrapper">
-        <h1>Sign In</h1>
-        <input name="token" value={signInForm.token} onChange={(e) => setSignInForm({ ...signInForm, token: e.currentTarget.value })} />
-      
-        <input type="submit" onClick={handleSignIn} />
+        <h1>SIGN IN</h1>
+        <div className="input-wrapper">
+          <input name="token" placeholder={"Enter Token"} value={signInForm.token} onChange={(e) => setSignInForm({ ...signInForm, token: e.currentTarget.value })} />
+        </div>
+        <button className="login-button" onClick={handleSignIn}>Sign In</button>
       </div>
     </div>
   )
