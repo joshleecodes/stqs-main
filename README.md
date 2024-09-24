@@ -1,38 +1,73 @@
-# STQS
+# Space Traders Web Application
+## Overview
+This project is a Space Traders web application built using React, TypeScript, and the Space Traders API. The app allows users to sign up or log in to manage their space trading journey, view contracts, access markets, shipyards, and mine resources, all while managing their agent's details such as credits and ships.
 
-## Goal
-Your goal is to visit [SpaceTraders.io](https://docs.spacetraders.io/quickstart/new-game) and implement as many features from the quickstart as you feel able to.
+## Features
+1. User Authentication:
+- Users can sign up where they will be assigned a new token or log in with an existing token.
+- Tokens are stored securely in local storage and are used for API authentication.
+- Automatic token verification on app launch (token persistence).
 
-> SpaceTraders is a fun, free game driven entirely through API interactions. It is not affiliated with us in any way, so please ensure you abide by their [rate limits](https://docs.spacetraders.io/api-guide/rate-limits).
-## Delivery
-We have scaffolded a small project (this repo) to get you started. It contains everything you need to run and work on your quickstart. We will be running it when we receive your submission, so please ensure it works and contains any additional information we need to run it.
+2. Hub:
+- Displays agent details (credits, headquarters, account ID).
+- Users can refresh agent data from the Space Traders API.
+- Users can refresh starting location data from the Space Traders API.
 
-On completion, return the repository to us, either zipped as an attachment or uploaded to a Git hosting service.
+3. Contracts:
+- Fetch and display contracts available for the agent.
+- Users can view contract details such as deadlines, payment terms, and delivery requirements.
+- Contracts can be accepted via the UI.
 
-## Tips
-We suggest focusing on a quality **vertical slice**, rather than lots of functionality. Consider this an opportunity to show us how you might approach building an application, which you will then have the chance to walk us through later. You do not need to build a large application - focus on demonstrating experience over feature completion.
+## Project Structure
+- Pages folder: Contains page-specific logic, styles and testing.
+- Components folder: Contains reusable components found on multiple pages.
+- API wrapper: Dedicated file for API calls interacting with the Space Traders API.
 
-Areas we will be looking to discuss include:
-- How you structure your code
-- Idiomatic use of React and ECMAScript
-- How you use the type system to build confidence in your code
-- Performance considerations when dealing with side effects and state
-- How styling is organized and applied (we don't expect you to be a designer, so don't worry about aesthetic choices)
-- How you use source code management (Git) to segment your changes
+## Technologies and Libraries
+- React with TypeScript: For building the front-end components.
+- SASS: For writing and organizing styles.
+- React Router: For page navigation.
+- Vite: As the build tool.
+- Vitest: For testing the API requests.
 
-We have implemented the very first part of the quickstart here to get you moving (see `NewGame.tsx`), but how you structure things (and how you present the user interface) is entirely up to you.
+## Error Handling/State Management
+### Error Handling: 
+Every API call uses a utility function `checkAPIResponse` to handle and log errors. API responses are checked for success, and appropriate errors are thrown and logged when API calls fail.
+### State Management:
+Local state management is handled using useState in components, with shared state (like token and agent details) managed in the `App.tsx` component and passed down as props. This ensures updates in one component reflect across others.
 
-## Requirements
+## Performance Considerations
+- Token Persistence: Tokens are stored in localStorage to persist user sessions, reducing the need for repeated logins.
+- API Requests: Data like agent details and contracts are cached in state after the first API call to avoid redundant requests when populating pages.
 
-NodeJS 18+
-NPM
+## Testing
+API calls in the project are tested using Vitest. This ensures that the API wrapper behaves as expected, verifying both the success and failure states of the API interactions.
 
-## Running
+## Styling
+The project uses SASS for styling. Each page has a corresponding .scss file, and shared styles are located in the index.scss file. SASS allows for better organization with styling variables, a single location for stylesheet imports, and co-located stylesheets with corresponding pages/components to keep the styling modular and maintainable.
 
-`npm ci`
-`npm run dev`
-See `package.json` for more details on available scripts.
+## Installation and Setup
+To run this project locally:
 
-## Exercise
+- Clone the repository: `git clone https://github.com/joshleecodes/stqs-main.git`
 
-Run the project (or read `./src/App.tsx`) for details of the exercise.
+- Install dependencies: `npm ci` or `pnpm install`
+
+- Run the app: `npm run dev` or `pnpm dev`
+
+- Testing can be run using Vitest: `npm run test` or `pnpm test`
+
+## Usage
+1. Sign Up or Log In: Start by registering with a new agent symbol and faction, or log in using your existing API token.
+2. Explore the Hub: Once logged in, the hub will display your agent details including account ID, credits, ship count, and headquarters location.
+3. Contracts: Navigate to the Contracts page to view available contracts. You can accept contracts to start fulfilling trade or delivery missions.
+4. Market, Shipyard, and Mining: These sections allow you to interact with other game elements like purchasing items, ships, or gathering resources.
+
+## Future Enhancements
+Here are some features that can be added to improve the app:
+
+- Further implmentation of pages such as Market, Shipyard, Mining to allow the user to interact with more features of the Space Traders API.
+- Hub Improvments: A more comprehensive Hub that shows a general overview of agent activities in one place. For example active contracts.
+- Polling on pages such as the Hub to ensure up to date data.
+- Limit API requests to prevent user spamming refresh buttons and protentially exceeding API request limitations.
+- More extensive testing of features and components.
