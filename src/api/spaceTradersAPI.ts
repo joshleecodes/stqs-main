@@ -39,14 +39,14 @@ export const viewAgentDetails = async (token: string) => {
   return await checkAPIResponse(resp, "viewAgent Error");
 };
 
-export const viewStartingLocation = async (token: string) => {
-  const resp = await fetch(API_URL_BASE + "/systems/X1-FS16/waypoints/X1-FS16-A1", {
+export const viewStartingLocation = async (token: string, headquarters: string) => {
+  const systemSymbol = headquarters.substring(0, headquarters.lastIndexOf("-"));
+  const resp = await fetch(API_URL_BASE + "/systems/" + systemSymbol +"/waypoints/" + headquarters, {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + token,
     },
   });
-
   return await checkAPIResponse(resp, "viewStartingLocation Error");
 };
 

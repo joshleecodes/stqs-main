@@ -58,7 +58,7 @@ const Hub = ({
 
   const handleViewStartingLocation = async () => {
     try {
-      const result = await APIWrapper.viewStartingLocation(token);
+      const result = await APIWrapper.viewStartingLocation(token, headquarters);
       if (result) {
         console.log(result);
         setStartingLocation(result.data);
