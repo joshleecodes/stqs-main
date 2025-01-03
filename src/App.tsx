@@ -15,6 +15,7 @@ function App() {
   const [shipCount, setShipCount] = useState<number>(0);
   const [headquarters, setHeadquarters] = useState<string>("");
   const [accountID, setAccountID] = useState<string>("");
+  const [systemSymbol, setSystemSymbol] = useState<string>("");
 
   useEffect(() => {
     localStorage.setItem("API Token", token);
@@ -58,6 +59,7 @@ function App() {
                   accountID={accountID}
                   setCredits={setCredits}
                   setShipCount={setShipCount}
+                  setSystemSymbol={setSystemSymbol}
                 />
             </> 
             : <Navigate to="/login" />} 
@@ -105,7 +107,10 @@ function App() {
                     shipCount={shipCount}
                     handleLogOut={handleLogOut}
                   />
-                  <Shipyard />
+                  <Shipyard 
+                    token={token}
+                    systemSymbol={systemSymbol}
+                  />
               </>
             : <Navigate to="/login" />} 
           />

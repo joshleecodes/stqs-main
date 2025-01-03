@@ -72,3 +72,14 @@ export const acceptContract = async (token: string, contractID: string) => {
 
   return await checkAPIResponse(resp, "acceptContract Error");
 };
+
+export const findShipyard = async (token: string, systemSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems/"  + systemSymbol + "/waypoints?traits=SHIPYARD", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token,
+    },
+  });
+
+  return await checkAPIResponse(resp, "findShipyard Error");
+};

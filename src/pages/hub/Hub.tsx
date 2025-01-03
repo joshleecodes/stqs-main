@@ -7,6 +7,7 @@ interface HubProps {
   accountID: string;
   setCredits: (credits: number) => void;
   setShipCount: (shipCount: number) => void;
+  setSystemSymbol: (systemSymbol: string) => void;
 }
 
 interface Location {
@@ -32,6 +33,7 @@ const Hub = ({
   accountID,
   setCredits,
   setShipCount,
+  setSystemSymbol,
 }: HubProps) => {
   const [startingLocation, setStartingLocation] = useState<Location | null>(null);
 
@@ -60,8 +62,8 @@ const Hub = ({
     try {
       const result = await APIWrapper.viewStartingLocation(token, headquarters);
       if (result) {
-        console.log(result);
         setStartingLocation(result.data);
+        setSystemSymbol(result.data.systemSymbol)
       }
     } catch (error) {
       console.error('Error fetching location data:', error);
