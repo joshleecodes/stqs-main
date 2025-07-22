@@ -21,8 +21,8 @@ const LogIn = ({
   setHeadquarters,
   setAccountID,
 }: LogInProps) => {
-  const [signUpForm, setSignUpForm] = useState({ symbol: "", faction: "COSMIC" });
-  const [signInForm, setSignInForm] = useState({ token: ""});
+  const [registerForm, setRegisterForm] = useState({ accToken: "", symbol: ""});
+  const [signInForm, setSignInForm] = useState({ agentToken: "" });
   const navigate = useNavigate();
 
   const updateAgent = (token: string, symbol: string, credits: number, shipCount: number, headquarters: string, accountID: string) => {
@@ -36,71 +36,71 @@ const LogIn = ({
   
   useEffect(() => {
     if (tokenExists) {
-      handleSignInLocal();
+      //handleSignInLocal();
     }
   }, [tokenExists]);
+  
 
-  const handleSignUp = async () => {
+  const handleRegisterAgent = async () => {
     try {
-      const result = await APIWrapper.signUp(signUpForm.symbol, signUpForm.faction);
+      const result = await APIWrapper.registerAgent(registerForm.accToken, registerForm.symbol);
+      if(result){
         console.log(result);
-        updateAgent(result.data.token, result.data.agent.symbol, result.data.agent.credits, result.data.agent.shipCount, result.data.agent.headquarters, result.data.agent.accountId);
+        updateAgent(result.token, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
         navigate("/hub");
-
+      }
     } catch (error) {
-      console.error('Error fetching location data:', error);
+      console.error('Failed to register agent', error);
     }
   };
 
   const handleSignIn = async () => {
     try {
-      const result = await APIWrapper.viewAgentDetails(signInForm.token);
-
+      const result = await APIWrapper.getAgent(signInForm.agentToken);
       if(result){
         console.log(result);
-        updateAgent(signInForm.token, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
+        updateAgent(signInForm.agentToken, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
         navigate("/hub");
       }
     } catch (error) {
-      console.error('API TOKEN NOT FOUND', error);
+      console.error('Failed to sign in', error);
     }
-  };
+  }
 
-  const handleSignInLocal = async () => {
-    const localToken = localStorage.getItem('API Token');
-    if (localToken) {
-      try {
-        const result = await APIWrapper.viewAgentDetails(localToken);
-        if (result) {
-          console.log(result);
-          updateAgent(localToken, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
-          navigate("/hub");
-        }
-      } catch (error) {
-        console.error('Stored API TOKEN NOT FOUND', error);
-      }
-    } else {
-      console.error('No token found in local storage.');
-    }
-  };
+  // const handleSignInLocal = async () => {
+  //   const localToken = localStorage.getItem('API Token');
+  //   if (localToken) {
+  //     try {
+  //       const result = await APIWrapper.viewAgentDetails(localToken);
+  //       if (result) {
+  //         console.log(result);
+  //         updateAgent(localToken, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
+  //         navigate("/hub");
+  //       }
+  //     } catch (error) {
+  //       console.error('Stored API TOKEN NOT FOUND', error);
+  //     }
+  //   } else {
+  //     console.error('No token found in local storage.');
+  //   }
+  // };
 
   return (
     <div className="login-container">
 
       <div className="signup-wrapper">
-        <h1>REGISTER</h1>
+        <h1>REGISTER AGENT</h1>
         <div className="input-wrapper">
-          <input name="symbol" placeholder={"Enter Symbol"} value={signUpForm.symbol} onChange={(e) => setSignUpForm({ ...signUpForm, symbol: e.currentTarget.value })} />
-          <input name="faction" placeholder={"Enter Faction"} value={signUpForm.faction} onChange={(e) => setSignUpForm({ ...signUpForm, faction: e.currentTarget.value })} />
+          <input name="accountToken" placeholder={"Enter Account Token"} value={registerForm.accToken} onChange={(e) => setRegisterForm({ ...registerForm, accToken: e.currentTarget.value })} />
+          <input name="symbol" placeholder={"Enter Symbol"} value={registerForm.symbol} onChange={(e) => setRegisterForm({ ...registerForm, symbol: e.currentTarget.value })} />
         </div>
-        
-        <button className="login-button" onClick={handleSignUp}>Sign Up</button>
+        <button className="login-button" onClick={handleRegisterAgent}>Register</button>
       </div>
 
       <div className="signin-wrapper">
         <h1>SIGN IN</h1>
         <div className="input-wrapper">
-          <input name="token" placeholder={"Enter Token"} value={signInForm.token} onChange={(e) => setSignInForm({ ...signInForm, token: e.currentTarget.value })} />
+          <input name="agentToken" placeholder={"Enter Agent Token"} value={signInForm.agentToken} onChange={(e) => setSignInForm({ ...registerForm, agentToken: e.currentTarget.value })} />
         </div>
         <button className="login-button" onClick={handleSignIn}>Sign In</button>
       </div>
