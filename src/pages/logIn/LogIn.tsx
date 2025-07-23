@@ -21,7 +21,7 @@ const LogIn = ({
   setHeadquarters,
   setAccountID,
 }: LogInProps) => {
-  const [registerForm, setRegisterForm] = useState({ accToken: "", symbol: ""});
+  //const [registerForm, setRegisterForm] = useState({ accToken: "", symbol: ""});
   const [signInForm, setSignInForm] = useState({ agentToken: "" });
   const navigate = useNavigate();
 
@@ -34,6 +34,7 @@ const LogIn = ({
     setAccountID(accountID);
   }
   
+  
   useEffect(() => {
     if (tokenExists) {
       //handleSignInLocal();
@@ -41,18 +42,18 @@ const LogIn = ({
   }, [tokenExists]);
   
 
-  const handleRegisterAgent = async () => {
-    try {
-      const result = await APIWrapper.registerAgent(registerForm.accToken, registerForm.symbol);
-      if(result){
-        console.log(result);
-        updateAgent(result.token, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
-        navigate("/hub");
-      }
-    } catch (error) {
-      console.error('Failed to register agent', error);
-    }
-  };
+  // const handleRegisterAgent = async () => {
+  //   try {
+  //     const result = await APIWrapper.registerAgent(registerForm.accToken, registerForm.symbol);
+  //     if(result){
+  //       console.log(result);
+  //       updateAgent(result.token, result.data.symbol, result.data.credits, result.data.shipCount, result.data.headquarters, result.data.accountId);
+  //       navigate("/hub");
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to register agent', error);
+  //   }
+  // };
 
   const handleSignIn = async () => {
     try {
@@ -88,19 +89,19 @@ const LogIn = ({
   return (
     <div className="login-container">
 
-      <div className="signup-wrapper">
+      {/* <div className="signup-wrapper">
         <h1>REGISTER AGENT</h1>
         <div className="input-wrapper">
           <input name="accountToken" placeholder={"Enter Account Token"} value={registerForm.accToken} onChange={(e) => setRegisterForm({ ...registerForm, accToken: e.currentTarget.value })} />
           <input name="symbol" placeholder={"Enter Symbol"} value={registerForm.symbol} onChange={(e) => setRegisterForm({ ...registerForm, symbol: e.currentTarget.value })} />
         </div>
         <button className="login-button" onClick={handleRegisterAgent}>Register</button>
-      </div>
+      </div> */}
 
       <div className="signin-wrapper">
         <h1>SIGN IN</h1>
         <div className="input-wrapper">
-          <input name="agentToken" placeholder={"Enter Agent Token"} value={signInForm.agentToken} onChange={(e) => setSignInForm({ ...registerForm, agentToken: e.currentTarget.value })} />
+          <input name="agentToken" placeholder={"Enter Agent Token"} value={signInForm.agentToken} onChange={(e) => setSignInForm({ ...signInForm, agentToken: e.currentTarget.value })} />
         </div>
         <button className="login-button" onClick={handleSignIn}>Sign In</button>
       </div>

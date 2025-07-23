@@ -39,7 +39,7 @@ token,
 
   const handleViewContracts = async () => {
     try {
-      const result = await APIWrapper.viewContracts(token);
+      const result = await APIWrapper.listContracts(token);
       if (result) {
         setContracts(result.data);
         console.log(result);
