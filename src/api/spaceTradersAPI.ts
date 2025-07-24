@@ -19,8 +19,7 @@ export const getAccountDetails = async (token: string) => {
   const resp = await fetch(API_URL_BASE + "/my/account", {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token, 
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "viewAccount Error");
@@ -31,12 +30,12 @@ export const registerAgent = async (token: string, symbol: string) => {
   const resp = await fetch(API_URL_BASE + "/register", {
     method: "POST",
     headers: {
+      "Authorization": "Bearer " + token,
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + token, 
     },
     body: JSON.stringify({
         "symbol": symbol,
-         "faction": "COSMIC",
+        "faction": "COSMIC",
       }),
   });
   return await checkAPIResponse(resp, "viewAgent Error");
@@ -46,11 +45,11 @@ export const registerAgent = async (token: string, symbol: string) => {
 // AGENTS API REQUESTS
 
 // List all public agent details
-export const listPublicAgents = async (token: string) => {
+export const listPublicAgents = async (token: string, page?: number, limit?: number) => {
   const resp = await fetch(API_URL_BASE + "/agents", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "listPublicAgents Error");
@@ -61,7 +60,7 @@ export const getPublicAgentDetails = async (token: string, agentSymbol: string) 
   const resp = await fetch(API_URL_BASE + "/agents/" + agentSymbol, {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getPublicAgentDetails Error");
@@ -72,8 +71,7 @@ export const getAgent = async (token: string) => {
   const resp = await fetch(API_URL_BASE + "/my/agent", {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token, 
+      "Authorization": "Bearer " + token
     }
   });
   return await checkAPIResponse(resp, "getAgent Error");
@@ -84,7 +82,7 @@ export const getAgentEvents = async (token: string) => {
   const resp = await fetch(API_URL_BASE + "/my/agent/events", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token, 
+      "Authorization": "Bearer " + token
     }
   });
   return await checkAPIResponse(resp, "getAgentEvents Error");
@@ -96,7 +94,7 @@ export const viewStartingLocation = async (token: string, headquarters: string) 
   const resp = await fetch(API_URL_BASE + "/systems/" + systemSymbol +"/waypoints/" + headquarters, {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "viewStartingLocation Error");
@@ -106,11 +104,11 @@ export const viewStartingLocation = async (token: string, headquarters: string) 
 //CONTRACT API REQUESTS
 
 // Return a paginated list of all your contracts
-export const listContracts = async (token: string) => {
+export const listContracts = async (token: string, page?: number, limit?: number) => {
   const resp = await fetch(API_URL_BASE + "/my/contracts", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "viewContract Error");
@@ -121,7 +119,7 @@ export const getContract = async (token: string, contractID: string) => {
   const resp = await fetch(API_URL_BASE + "/my/contracts/" + contractID, {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "viewContract Error");
@@ -132,8 +130,7 @@ export const acceptContract = async (token: string, contractID: string) => {
   const resp = await fetch(API_URL_BASE + "/my/contracts/" + contractID + "/accept", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "acceptContract Error");
@@ -144,8 +141,7 @@ export const fulfillContract = async (token: string, contractID: string) => {
   const resp = await fetch(API_URL_BASE + "/my/contracts" + contractID + "/fulfill", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "fulfillContract Error");
@@ -173,8 +169,7 @@ export const negotiateContract = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/"+ shipSymbol +"/negotiate/contract", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "negotiateContract Error");
@@ -184,17 +179,12 @@ export const negotiateContract = async (token: string, shipSymbol: string) => {
 // FACTION API REQUESTS
 
 // Return a paginated list of all the factions in the game
-export const listFactions = async (token: string, pageValue: number, limitValue: number) => {
+export const listFactions = async (token: string, page?: number, limit?: number) => {
   const resp = await fetch(API_URL_BASE + "/factions", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
-    body: JSON.stringify({
-        "page": pageValue,
-        "limitValue": limitValue
-      }),
   });
   return await checkAPIResponse(resp, "listFactions Error");
 };
@@ -204,25 +194,19 @@ export const getFactionDetails = async (token: string, factionSymbol: string) =>
   const resp = await fetch(API_URL_BASE + "/factions/" + factionSymbol, {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getFactionDetails Error");
 };
 
 // Retrieve factions with which the agent has reputation
-export const getAgentFactions = async (token: string, pageValue: number, limitValue: number) => {
+export const getAgentFactions = async (token: string, page?: number, limit?: number) => {
   const resp = await fetch(API_URL_BASE + "/my/factions", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
-    body: JSON.stringify({
-        "page": pageValue,
-        "limitValue": limitValue
-      }),
   });
   return await checkAPIResponse(resp, "getAgentFactions Error");
 };
@@ -231,17 +215,12 @@ export const getAgentFactions = async (token: string, pageValue: number, limitVa
 // FLEET API REQUESTS
 
 // Return a paginated list of all of ships under your agent's ownership
-export const listAgentShips = async (token: string, pageValue: number, limitValue: number) => {
+export const listAgentShips = async (token: string, page?: number, limit?: number) => {
   const resp = await fetch(API_URL_BASE + "/my/ships", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
-    body: JSON.stringify({
-        "page": pageValue,
-        "limitValue": limitValue
-      }),
   });
   return await checkAPIResponse(resp, "listAgentShips Error");
 };
@@ -267,8 +246,7 @@ export const getShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol, {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getShip Error");
@@ -279,8 +257,7 @@ export const createChart = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/chart", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "createChart Error");
@@ -291,8 +268,7 @@ export const getShipCooldown = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/cooldown", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getShipCooldown Error");
@@ -303,8 +279,7 @@ export const dockShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/dock", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "dockShip Error");
@@ -315,8 +290,7 @@ export const extractResources = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/extract", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "extractResources Error");
@@ -379,8 +353,7 @@ export const scanSystems = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/scan/systems", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "scanSystems Error");
@@ -391,8 +364,7 @@ export const scanWaypoints = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/scan/waypoints", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "scanSystems Error");
@@ -403,8 +375,7 @@ export const scanShips = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/scan/ships", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "scanShips Error");
@@ -415,8 +386,7 @@ export const scrapShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/scrap", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "scrapShip Error");
@@ -427,8 +397,7 @@ export const getScrapShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/scrap", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getScrapShip Error");
@@ -508,7 +477,7 @@ export const shipRefine = async (token: string, shipSymbol: string, produce: str
 };
 
 // Refuel your ship by buying fuel from the local market
-export const refuelShip = async (token: string, shipSymbol: string, units: number, fromCargo: boolean) => {
+export const refuelShip = async (token: string, shipSymbol: string, units?: number, fromCargo?: boolean) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/refuel", {
     method: "POST",
     headers: {
@@ -528,8 +497,7 @@ export const repairShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/repair", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "repairShip Error");
@@ -540,8 +508,7 @@ export const getRepairShip = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/repair", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getRepairShip Error");
@@ -568,8 +535,7 @@ export const siphonResources = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/siphon", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "siphonResources Error");
@@ -580,8 +546,7 @@ export const createSurvey = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/survey", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "createSurvey Error");
@@ -609,8 +574,7 @@ export const getShipCargo = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/cargo", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getShipCargo Error");
@@ -621,8 +585,7 @@ export const getShipModules = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/modules", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getShipModules Error");
@@ -663,8 +626,7 @@ export const getMounts = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/mounts", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getMounts Error");
@@ -705,15 +667,14 @@ export const getShipNav = async (token: string, shipSymbol: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/nav", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
     },
   });
   return await checkAPIResponse(resp, "getShipNav Error");
 };
 
 // Update the nav configuration of a ship
-export const patchShipNav = async (token: string, shipSymbol: string, flightMode: string) => {
+export const patchShipNav = async (token: string, shipSymbol: string, flightMode?: string) => {
   const resp = await fetch(API_URL_BASE + "/my/ships/" + shipSymbol + "/nav", {
     method: "PATCH",
     headers: {
@@ -725,4 +686,163 @@ export const patchShipNav = async (token: string, shipSymbol: string, flightMode
   })
   });
   return await checkAPIResponse(resp, "patchShipNav Error");
+};
+
+
+// SYSTEMS API REQUESTS
+
+// Return a paginated list of all systems
+export const listSystems = async (token: string, page?: number, limit?: number) => {
+  const resp = await fetch(API_URL_BASE + "/systems", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "listSystems Error");
+};
+
+// Get the details of a system
+export const getSystems = async (token: string, systemSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getSystems Error");
+};
+
+// Return a paginated list of all of the waypoints for a given system
+export const listWaypointInSystem = async (token: string, systemSymbol: string, page?: number, limit?: number, traits?: string[]) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "listWaypointInSystem Error");
+};
+
+// View the details of a waypoint
+export const getWaypoint = async (token: string, systemSymbol: string, waypointSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getWaypoint Error");
+};
+
+// Get construction details for a waypoint
+export const getContructionSite = async (token: string, systemSymbol: string, waypointSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol + "/construction", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  });
+  return await checkAPIResponse(resp, "getWaypoint Error");
+};
+
+// Supply a construction site with the specified good
+export const supplyContructionSite = async (token: string, systemSymbol: string, waypointSymbol: string, shipSymbol: string, tradeSymbol: string, units: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol + "/construction/supply", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+    shipSymbol: shipSymbol,
+    tradeSymbol: tradeSymbol,
+    units: units
+  })
+  });
+  return await checkAPIResponse(resp, "getWaypoint Error");
+};
+
+// Retrieve imports, exports and exchange data from a marketplace
+export const getMarket = async (token: string, systemSymbol: string, waypointSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol + "/market", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getMarket Error");
+};
+
+// Get jump gate details for a waypoint
+export const getJumpGate = async (token: string, systemSymbol: string, waypointSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol + "/jump-gate", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getJumpGate Error");
+};
+
+// Get jump gate details for a waypoint
+export const getShipyard = async (token: string, systemSymbol: string, waypointSymbol: string) => {
+  const resp = await fetch(API_URL_BASE + "/systems" + systemSymbol + "/waypoints/" + waypointSymbol + "/shipyard", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getShipyard Error");
+};
+
+
+// DATA API REQUESTS
+
+// Describes which import and exports map to each other
+export const describeTradeRelation = async (token: string) => {
+  const resp = await fetch(API_URL_BASE + "/market/supply-chain", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "describeTradeRelation Error");
+};
+
+// Subscribe to departure events for a system
+export const subscribeToEvents = async (token: string) => {
+  const resp = await fetch(API_URL_BASE + "/my/socket.io", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "subscribeToEvents Error");
+};
+
+
+// GLOBAL API REQUESTS
+
+// Return the status of the game server
+export const getServerStatus = async (token: string) => {
+  const resp = await fetch(API_URL_BASE, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getServerStatus Error");
+};
+
+// Return a list of all possible error codes thrown by the game server
+export const getErrorCodeList = async (token: string) => {
+  const resp = await fetch(API_URL_BASE + "/error-codes", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+  });
+  return await checkAPIResponse(resp, "getErrorCodeList Error");
 };
