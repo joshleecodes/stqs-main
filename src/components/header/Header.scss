@@ -1,38 +1,73 @@
 .header-container{
-    width: 96vw;
-    padding: 0 2vw;
-    height: 8vh;
+    width: 18vw;
+    padding: 0.75vh 1vw;
+    height: 98.5vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background-color: $black;
     justify-content: space-between;
-    align-items: center;
-    background-color: $zomp;
-    border-bottom: 1px solid $bittersweet;
 }
 
-.header-details-wrapper, .header-nav-wrapper{
+.header-details-wrapper, .header-nav-wrapper {
     display: flex;
-    justify-content: space-around;
-    width: 30vw;
+    flex-direction: column;
+    width: 17.5vw;
+}  
+
+.header-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 17.5vw;
+    justify-content: flex-start;
+    padding-bottom: 1vh;
+}
+
+.header-title-logo {
+    width: 4vw;
+    padding: 0 0.5vw 0 0.5vw;
+}
+
+.header-title {
+    width: 10vw;
 }
 
 .header-details-wrapper{
     max-width: 25vw;
-    color: $slate;
+    color: $white;
 }
 
 .details-info, .nav-item {
     display: flex;
     align-items: center;
-
 }
 
-.header-button{
-    height: 3vh;
-    background-color: $slate;
-    color: $bittersweet;
+.nav-item {
+    padding: 0.5vh 1vw;
+    font-size: $nav-button;
+    font-weight: 400;
 }
 
-.header-button:hover{
-    border-color: $bittersweet;
+.header-footer-wrapper {
+    justify-self: flex-end;
+    padding: 1vh 1vw;
+}
+
+.details-symbol {
+    margin: 0;
+    cursor: pointer;
+}
+
+.header-user_details {
+    height: 10vh;
+}
+
+.header-button {
+    height: 5vh;
+    width: 16vw;
+    background-color: $yellow;
+    color: $white;
+    justify-content: center;
+}
+
+.header-button:hover {
 }

@@ -9,15 +9,11 @@
 
 
 :root {
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: $slate;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -27,25 +23,27 @@
 
 a {
   font-weight: 500;
-  color: $slate;
+  color: $white;
   text-decoration: inherit;
 }
+
 a:hover {
-  color: $bittersweet;
+  color: $white;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
+  background-color: $grey
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: $bittersweet;
+  color: $white;
   margin: 0;
 }
 
@@ -62,7 +60,7 @@ button {
   height: 5vh;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: darken($color: $yellow, $amount: 10%);
 }
 button:focus,
 button:focus-visible {

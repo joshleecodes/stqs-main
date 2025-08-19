@@ -33,14 +33,13 @@ const LogIn = ({
     setHeadquarters(headquarters);
     setAccountID(accountID);
   }
-  
-  
+
   useEffect(() => {
     if (tokenExists) {
       //handleSignInLocal();
     }
   }, [tokenExists]);
-  
+
 
   // const handleRegisterAgent = async () => {
   //   try {

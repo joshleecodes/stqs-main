@@ -12,6 +12,7 @@ const checkAPIResponse = async (response: Response, errorMessage: string) => {
   }
 };
 
+
 // ACCOUNT API REQUESTS
 
 // Fetch your account details

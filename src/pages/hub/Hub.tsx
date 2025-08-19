@@ -47,7 +47,7 @@ const Hub = ({
 
   const handleViewAgentDetails = async () => {
     try {
-      const result = await APIWrapper.viewAgentDetails(token);
+      const result = await APIWrapper.getAgent(token);
       if (result) {
         refreshAgentDetails(result.data.credits, result.data.shipCount)
       }
@@ -70,7 +70,6 @@ const Hub = ({
 
   return (
     <div className="hub-container">
-      
       <div className="agent-details-wrapper hub-details">
         <h2>Agent Details:</h2>
         <p>Account ID: {accountID}</p>
